@@ -1,7 +1,5 @@
 import { useState } from "react"
 import "./AppTask.css"
-// import bin from "./images/bin.png"
-
 
 //  CRUD - create, read, update & delete
 //  This application does all of these things
