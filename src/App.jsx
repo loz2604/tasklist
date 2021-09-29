@@ -1,9 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./AppTask.css"
+// import icon from "./images/to-do-list"
+
 
 //  CRUD - create, read, update & delete
 //  This application does all of these things
 const App = () => {
+    useEffect(() => {
+        document.title = "To Do List"
+    }, [])
     const [userInput, setUserInput] = useState("");
     const [todos, setTodos] = useState([]);
 
@@ -17,6 +22,7 @@ const App = () => {
         let formData = todos
         formData.push(userInput)
         setTodos([...formData])
+
         //  Or to change from string to object so we can have more than one value
 
         // setTodos([...formData, {
@@ -28,24 +34,38 @@ const App = () => {
     }
 
     return (
-        <div className="wrappper">
-            <form id="form" onSubmit={handleSubmit}>
-                <label id="label" htmlFor="task">To Do List</label>
-                <input id="task" type="text" placeholder="Enter New Task" onChange={handleInput} value={userInput} />
-                <button id="submit" type="submit">Add Task</button>
-            </form>
-            <ul >
-                {todos.map((todo) => (
-                    <li className="grow" key={todo}>
-                        {todo}{' '}
-                        <button onClick={() => {
-                            setTodos(todos.filter((t) => t !== todo));
-                        }}
-                        >x</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <body>
+            <div className="wrapper">
+                <form id="form" onSubmit={handleSubmit}>
+                    <label id="label" htmlFor="task">To Do List</label>
+                    <input id="task" type="text" placeholder="Enter New Task" onChange={handleInput} value={userInput} />
+                    <button id="submit" type="submit">Add Task</button>
+                </form>
+                <div id="right">
+                    <ul>
+                        <div id="todo"><h1>Tasks</h1></div>
+                        {todos.map((todo) => (
+                            <li className="grow" key={todo}>
+                                <div>
+                                    <p id="item">{todo}{' '}</p>
+                                    <div id="date">
+                                        <p id="newDate">Date Created - {new Date().toLocaleString("en-US", { day: "2-digit", month: "short" })}</p>
+                                    </div>
+                                </div>
+
+                                <button onClick={() => {
+                                    setTodos(todos.filter((t) => t !== todo));
+                                }}
+                                >x</button>
+
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+            </div>
+        </body>
+
     )
 }
 
@@ -77,7 +97,7 @@ export default App;
 //     // }
 // }
 {/* <input name="checkbox" type="checkbox" onChange={handleChange} /> */ }
-{/* <ul>
+{/* <ul>}
                 {todos.map((todo) => {
                     return <li key={todo}>{todo}{''}
                         <button id="remove" type="button" onClick={() => {
