@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "./AppTask.css"
 // import icon from "./images/to-do-list"
 
@@ -6,9 +6,7 @@ import "./AppTask.css"
 //  CRUD - create, read, update & delete
 //  This application does all of these things
 const App = () => {
-    useEffect(() => {
-        document.title = "To Do List"
-    }, [])
+
     const [userInput, setUserInput] = useState("");
     const [todos, setTodos] = useState([]);
 
